@@ -3,7 +3,61 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://use.typekit.net/usl8pnb.css" />
+        <link rel="stylesheet" href="css/style.css" />
         <title>Start</title>
     </head>
-    <body></body>
+    <body>
+        <div class="frame-wrap">
+            <main class="frame" aria-label="Game Start Page">
+                <h1 class="welcome">Welcome to CodeHacker</h1>
+                <section class="name-block" aria-label="Username input">
+                    <div class="name-label">Enter your name:</div>
+                    <input
+                        id="username"
+                        class="name-input"
+                        type="text"
+                        placeholder="e.g., Alex"
+                        maxlength="20"
+                        autocomplete="nickname"
+                        aria-label="Enter your name"
+                    />
+                </section>
+
+                <div class="actions">
+                    <button id="startBtn" class="start-btn" disabled>
+                        Start
+                    </button>
+                </div>
+
+                <section
+                    class="instructions"
+                    aria-label="How to play instructions"
+                >
+                    <h2 class="instructions-title">
+                        <span>How to Play?</span>
+                    </h2>
+                    <ul class="how-list">
+                        <li>The game generates a random 7-digit code.</li>
+                        <li>
+                            Players work together and take turns entering
+                            guesses.
+                        </li>
+                        <li>
+                            After each guess, you’ll see how many digits are in
+                            the correct position.
+                        </li>
+                        <li>
+                            All guesses and results are saved for the group to
+                            review.
+                        </li>
+                        <li>
+                            You have 20 total guesses to crack the code-
+                            <b>win before you run out!</b>
+                        </li>
+                    </ul>
+                </section>
+            </main>
+        </div>
+    </body>
 </html>
