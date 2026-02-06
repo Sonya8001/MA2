@@ -119,7 +119,7 @@ function buildHistoryRow(entry) {
     guessCell.className = "guess-cell";
     guessCell.textContent = entry
         ? entry.guess.split("").join(" ")
-        : Array(digits).fill("—").join(" ");
+        : "— — — — —";
 
     const correctCell = document.createElement("div");
     correctCell.className = "correct-cell";
@@ -200,14 +200,30 @@ function renderState(state) {
 function showFinish(status) {
     if (!finishOverlay.classList.contains("hidden")) return;
 
-    finishOverlay.classList.remove("win", "lose");
+    console.log("showFinish called with status:", status);
+    finishOverlay.classList.remove("wi n", "lose");
     finishOverlay.classList.add(status === "win" ? "win" : "lose");
+    console.log("Added class:", status === "win" ? "win" : "lose");
+    console.log("Overlay classes:", finishOverlay.className);
+
+    // Create random rain
+    const rainLayer = document.querySelector(".rain-layer");
+    rainLayer.innerHTML = "";
+    for (let i = 0; i < 15; i++) {
+        const rain = document.createElement("div");
+        rain.className = "rain-item";
+        rain.style.left = Math.random() * 92 + "%"; // better distribution
+        rain.style.top = "-" + (100 + Math.random() * 200) + "px"; // start high above screen
+        rain.style.animationDelay = Math.random() * 4 + "s";
+        rain.style.animationDuration = 3 + Math.random() * 2 + "s";
+        rainLayer.appendChild(rain);
+    }
 
     if (status === "win") {
         const wins = parseInt(getCookie("wins") || "0", 10) + 1;
         setCookie("wins", String(wins), 365);
 
-        finishTitle.textContent = "Congradulations! You cracked the code!";
+        finishTitle.textContent = "Congratulations! You cracked the code!";
         finishText.textContent = `Wins: ${wins}`;
     } else {
         finishTitle.textContent = "You didn't crack the code :(";
@@ -216,6 +232,7 @@ function showFinish(status) {
 
     finishHint.textContent = "";
     finishOverlay.classList.remove("hidden");
+    console.log("Rain should be showing now!");
 }
 
 function onPlayAgain() {
@@ -235,8 +252,6 @@ async function onCopyLink() {
     await navigator.clipboard.writeText(url.toString());
     finishHint.textContent = "Link copied.";
 }
-
-/* ---------- API ---------- */
 
 async function apiNewGame(body) {
     const r = await fetch("/api/new", {
@@ -264,8 +279,6 @@ async function apiGuess(body) {
     return r.json();
 }
 
-/* ---------- Cookies ---------- */
-
 function setCookie(name, value, days) {
     const d = new Date();
     d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
@@ -279,8 +292,6 @@ function getCookie(name) {
         if (p.startsWith(key)) return decodeURIComponent(p.slice(key.length));
     return null;
 }
-
-/* ---------- Utils ---------- */
 
 function clampInt(raw, fallback, min, max) {
     const n = parseInt(raw ?? "", 10);
