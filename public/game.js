@@ -197,7 +197,7 @@ function showFinish(status) {
     if (!finishOverlay.classList.contains("hidden")) return;
 
     console.log("showFinish called with status:", status);
-    finishOverlay.classList.remove("wi n", "lose");
+    finishOverlay.classList.remove("win", "lose");
     finishOverlay.classList.add(status === "win" ? "win" : "lose");
     console.log("Added class:", status === "win" ? "win" : "lose");
     console.log("Overlay classes:", finishOverlay.className);
