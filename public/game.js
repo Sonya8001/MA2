@@ -13,7 +13,6 @@ const guessInputsWrap = document.getElementById("guessInputs");
 const guessBtn = document.getElementById("guessBtn");
 const hintEl = document.getElementById("hint");
 
-// Finish overlay
 const finishOverlay = document.getElementById("finishOverlay");
 const finishTitle = document.getElementById("finishTitle");
 const finishText = document.getElementById("finishText");
@@ -24,7 +23,6 @@ const finishCopyLinkBtn = document.getElementById("finishCopyLinkBtn");
 init();
 
 async function init() {
-    // player name from URL -> cookie
     const nameFromUrl = params.get("username");
     if (nameFromUrl) setCookie("playerName", nameFromUrl, 30);
 
@@ -41,7 +39,6 @@ async function init() {
     finishCopyLinkBtn.addEventListener("click", onCopyLink);
 
     try {
-        // create new game if needed
         if (!gameId) {
             const created = await apiNewGame({ digits, maxGuesses });
             gameId = created.gameId;
@@ -61,7 +58,6 @@ async function init() {
 
         hintEl.textContent = `Digits: ${state.digits} • Max guesses: ${state.maxGuesses}`;
     } catch (e) {
-        // If you see this, your API isn't running / you're using file://
         remainingBoxEl.textContent = "—";
         guessBtn.disabled = true;
         setInputsDisabled(true);
@@ -206,14 +202,13 @@ function showFinish(status) {
     console.log("Added class:", status === "win" ? "win" : "lose");
     console.log("Overlay classes:", finishOverlay.className);
 
-    // Create random rain
     const rainLayer = document.querySelector(".rain-layer");
     rainLayer.innerHTML = "";
     for (let i = 0; i < 15; i++) {
         const rain = document.createElement("div");
         rain.className = "rain-item";
-        rain.style.left = Math.random() * 92 + "%"; // better distribution
-        rain.style.top = "-" + (100 + Math.random() * 200) + "px"; // start high above screen
+        rain.style.left = Math.random() * 92 + "%";
+        rain.style.top = "-" + (100 + Math.random() * 200) + "px";
         rain.style.animationDelay = Math.random() * 4 + "s";
         rain.style.animationDuration = 3 + Math.random() * 2 + "s";
         rainLayer.appendChild(rain);

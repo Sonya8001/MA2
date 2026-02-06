@@ -114,7 +114,6 @@ body {
     font-weight: 800;
 }
 
-/* Input area with “7 dashes” */
 .input-panel {
     padding-top: 24px;
     padding-bottom: 24px;
@@ -133,7 +132,7 @@ body {
     height: 54px;
     background: transparent;
     border: none;
-    border-bottom: 6px solid #000; /* dash line */
+    border-bottom: 6px solid #000;
     outline: none;
     text-align: center;
     font-size: 34px;
@@ -141,7 +140,7 @@ body {
 }
 
 .dash:focus {
-    border-bottom-color: #fff; /* white highlight */
+    border-bottom-color: #fff;
 }
 
 .guess-actions {
@@ -175,7 +174,6 @@ body {
     color: #000;
 }
 
-/* Finish overlay + rain */
 .overlay {
     position: fixed;
     inset: 0;
@@ -229,7 +227,7 @@ body {
     font-size: 28px;
     text-align: center;
     color: #000;
-    background: #fff; /* white highlight */
+    background: #fff;
     padding: 10px 12px;
     border-radius: 12px;
 }

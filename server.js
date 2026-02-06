@@ -9,16 +9,13 @@ app.use(express.static("public"));
 
 let dataStore = [{ name: "Teacher", message: "API is live!" }];
 
-// Game storage
 const games = new Map();
 
-// Game endpoints
 app.post("/api/new", (req, res) => {
     const { digits = 7, maxGuesses = 20 } = req.body || {};
 
-    // Generate random secret number with specified digits
     const secret = Array.from({ length: digits }, () =>
-        Math.floor(Math.random() * 10)
+        Math.floor(Math.random() * 10),
     ).join("");
 
     const gameId = `game_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
@@ -28,7 +25,7 @@ app.post("/api/new", (req, res) => {
         digits,
         maxGuesses,
         history: [],
-        status: "playing"
+        status: "playing",
     });
 
     res.json({ gameId });
@@ -48,7 +45,7 @@ app.get("/api/state", (req, res) => {
         maxGuesses: game.maxGuesses,
         guessesRemaining: game.maxGuesses - game.history.length,
         history: game.history,
-        status: game.status
+        status: game.status,
     });
 });
 
@@ -69,7 +66,6 @@ app.post("/api/guess", (req, res) => {
         return res.status(400).json({ message: "Invalid guess length" });
     }
 
-    // Count how many digits are correct (same digit in same position)
     let digitsCorrect = 0;
     for (let i = 0; i < guess.length; i++) {
         if (guess[i] === game.secret[i]) {
@@ -80,7 +76,6 @@ app.post("/api/guess", (req, res) => {
     const turn = game.history.length + 1;
     game.history.push({ turn, guess, digitsCorrect });
 
-    // Check win/lose conditions
     if (digitsCorrect === game.digits) {
         game.status = "win";
     } else if (turn >= game.maxGuesses) {
@@ -92,7 +87,7 @@ app.post("/api/guess", (req, res) => {
         maxGuesses: game.maxGuesses,
         guessesRemaining: game.maxGuesses - game.history.length,
         history: game.history,
-        status: game.status
+        status: game.status,
     });
 });
 
