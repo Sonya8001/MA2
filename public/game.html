@@ -4,6 +4,86 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Game</title>
+
+        <link rel="stylesheet" href="https://use.typekit.net/usl8pnb.css" />
+        <link rel="stylesheet" href="css/game.css" />
     </head>
-    <body></body>
+
+    <body>
+        <main class="page">
+            <header class="hud">
+                <div class="hud-row">
+                    <div class="player-line">
+                        <span class="player-label">Player:</span>
+                        <span id="playerName" class="player-value">—</span>
+                    </div>
+
+                    <div class="remaining-line">
+                        <span class="remaining-label">Guesses Remaining:</span>
+                        <span id="remainingBox" class="remaining-box">—</span>
+                    </div>
+                </div>
+            </header>
+
+            <section class="panel history-panel" aria-label="Guess history">
+                <div class="history-grid">
+                    <div class="history-col">
+                        <div class="history-head">
+                            <div class="head-left">Guess</div>
+                            <div class="head-right">Digits Correct</div>
+                        </div>
+                        <ol id="listLeft" class="history-list"></ol>
+                    </div>
+
+                    <div class="history-col">
+                        <div class="history-head">
+                            <div class="head-left">Guess</div>
+                            <div class="head-right">Digits Correct</div>
+                        </div>
+                        <ol id="listRight" class="history-list" start="11"></ol>
+                    </div>
+                </div>
+            </section>
+
+            <section class="panel input-panel" aria-label="Enter guess">
+                <div id="guessInputs" class="dash-inputs"></div>
+                <div class="guess-actions">
+                    <button id="guessBtn" class="btn" type="button">
+                        Guess
+                    </button>
+                </div>
+                <div id="hint" class="hint"></div>
+            </section>
+        </main>
+        <div
+            id="finishOverlay"
+            class="overlay hidden"
+            role="dialog"
+            aria-modal="true"
+        >
+            <div class="rain-layer" aria-hidden="true"></div>
+
+            <div class="overlay-card">
+                <h2 id="finishTitle" class="finish-title"></h2>
+                <p id="finishText" class="finish-text"></p>
+
+                <div class="finish-actions">
+                    <button id="finishPlayAgainBtn" class="btn" type="button">
+                        Play again
+                    </button>
+                    <button
+                        id="finishCopyLinkBtn"
+                        class="btn secondary"
+                        type="button"
+                    >
+                        Copy link
+                    </button>
+                </div>
+
+                <div id="finishHint" class="hint"></div>
+            </div>
+        </div>
+
+        <script src="game.js"></script>
+    </body>
 </html>
